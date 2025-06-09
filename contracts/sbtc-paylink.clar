@@ -428,3 +428,19 @@
     (ok id)
   ))
 )
+
+;; Batch retrieval function for multiple payment links (UI optimization)
+(define-public (get-multiple-links (ids (list 20 uint)))
+  (begin
+    (asserts! (<= (len ids) MAX-BATCH-SIZE) (err ERR-INVALID-AMOUNT))
+    (ok (map get-link-or-none ids))
+  )
+)
+
+;; Get multiple payment links (simple batch operation)
+(define-public (get-links-batch (ids (list 10 uint)))
+  (begin
+    (asserts! (<= (len ids) u10) (err ERR-INVALID-AMOUNT))
+    (ok (map get-link-or-none ids))
+  )
+)
